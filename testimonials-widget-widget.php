@@ -4,6 +4,7 @@
  * Description: This testimonial widget will flash to alternate different reviews displayed in your Wordpress sidebar. 
  * Version: 1.0
  * Authors: Ladies Code
+ * License:
  */
 
 /*
@@ -61,10 +62,10 @@ class testimonials_widget extends WP_Widget {
 		if ( $title )
 			echo $before_title . $title . $after_title;
 
-		/* Display Widget */
+		/* This will allow for the displaying of the widget testimonial to be displayed out. */
 			echo $testimonials;
 
-		/* After widget (defined by themes). */
+		/* Will echo as a result of $after_widget which is assigned according to the theme */
 			echo $after_widget;
 		}
 
@@ -119,9 +120,11 @@ class testimonials_widget extends WP_Widget {
         	$show_source_checked = ' checked="checked"';
         if($instance['random_order'])
         	$random_order_checked = ' checked="checked"';
-
+		// This is the text box label for the 'Title' of the widget
 		echo '<p><label for="'.$this->get_field_id( 'title' ).'">'.__('Title', 'testimonials-widget').' </label><input class="widefat" type="text" id="'.$this->get_field_id( 'title' ).'" name="'.$this->get_field_name( 'title' ).'" value="'.htmlspecialchars($instance['title'], ENT_QUOTES).'" /></p>';
+		// Assigned is the minimum height of which the field box of the widget will be
 		echo '<p><label for="'.$this->get_field_id( 'min_height' ).'">'.__('Minimum Height', 'testimonials-widget').' </label><input class="widefat" type="text" id="'.$this->get_field_id( 'min_height' ).'" name="'.$this->get_field_name( 'min_height' ).'" value="'.htmlspecialchars($instance['min_height'], ENT_QUOTES).'" /><br/><span class="setting-description"><small>'.__('Minimum height in px, this must be set to a value that suits your logest testimonial (increase this value if you find that your testimonials are getting cut off).', 'testimonials-widget').'</small></span></p>';
+		//This is if the back end user would like for the author to appear on the front end of the widget
 		echo '<p><input type="checkbox" id="'.$this->get_field_id( 'show_author' ).'" name="'.$this->get_field_name( 'show_author' ).'" value="1"'.$show_author_checked.' /> <label for="'.$this->get_field_id( 'show_author' ).'">'.__('Show author?', 'testimonials-widget').'</label></p>';
 		echo '<p><input type="checkbox" id="'.$this->get_field_id( 'show_source' ).'" name="'.$this->get_field_name( 'show_source' ).'" value="1"'.$show_source_checked.' /> <label for="'.$this->get_field_id( 'show_source' ).'">'.__('Show source?', 'testimonials-widget').'</label></p>';
 		echo "<p style=\"text-align:left;\"><small><a id=\"".$this->get_field_id( 'adv_key' )."\" style=\"cursor:pointer;\" onclick=\"jQuery('div#".$this->get_field_id( 'adv_opts' )."').slideToggle();\">".__('Advanced options', 'testimonials-widget')." &raquo;</a></small></p>";
