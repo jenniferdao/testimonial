@@ -91,7 +91,9 @@ function testimonialswidget_pagenav($total, $current = 1, $format = 0, $paged = 
 	return $pagenav;
 }
 
-
+/** This will allow for the function to actually allow for the testimonial to be added with the following $list
+ *  The testimonial, author, source, rags and if it is to be public will be present on the admin page for the WP user
+*/
 function testimonialswidget_addtestimonial($testimonial, $author = "", $source = "", $tags = "", $public = 'yes')
 {
 	if(!$testimonial) return __('Nothing added to the database.', 'testimonials-widget');
@@ -135,7 +137,8 @@ function testimonialswidget_edittestimonial($testimonial_id, $testimonial, $auth
 	$table_name = $wpdb->prefix . "testimonialswidget";
 	if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name)
 		return __('Database table not found', 'testimonials-widget');
-	else //Update database
+	//This will allow for the table database to be updated according to what is being inputted by the user's backend
+	else 
 	{
 		$testimonial = trim( stripslashes($testimonial) );
 		$author = trim( stripslashes($author) );
@@ -161,14 +164,16 @@ function testimonialswidget_edittestimonial($testimonial_id, $testimonial, $auth
 				time_updated = NOW()
 			WHERE testimonial_id = $testimonial_id";
 		$results = $wpdb->query( $update );
+		//The 'if' conditional if conclusive as false then it will be returned to an error 
 		if(FALSE === $results)
 			return __('There was an error in the MySQL query', 'testimonials-widget');
+		//If successful, opposite of the other results, then the changes will be adjusted accordingly to the user's input 
 		else
 			return __('Changes saved', 'testimonials-widget');
    }
 }
 
-
+// Thiis function will call upon the removal of the testimonial in which the user ould like to delete 
 function testimonialswidget_deletetestimonial($testimonial_id)
 {
 	if($testimonial_id) {
